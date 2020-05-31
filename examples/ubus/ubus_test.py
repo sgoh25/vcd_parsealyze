@@ -15,7 +15,7 @@ An example using the vcd parsing library. This parses VCD output from the UBUS
 example shipped with the UVM BCL.
 
 This example can be extended to provide interleaved transaction recording, using
-UbusTrackers that exist for a transaction lifetime, or just extend the simple tracker 
+UbusTrackers that exist for a transaction lifetime, or just extend the simple tracker
 below to filter/analyze a subset of signals within the VCD dump.
 """
 
@@ -81,20 +81,12 @@ class UbusTracker(vcd.VCDTracker):
 
     def start_state(self):
         if self["ubus_tb_top.vif.sig_write"] == "1":
-            print(
-                "WRITE addr: {:#x}".format(
-                    vcd.v2d(self["ubus_tb_top.vif.sig_addr"])
-                )
-            )
+            print("WRITE addr: {:#x}".format(vcd.v2d(self["ubus_tb_top.vif.sig_addr"])))
             self.state = self.states["WRITE"]
             return
 
         if self["ubus_tb_top.vif.sig_read"] == "1":
-            print(
-                "READ addr: {:#x}".format(
-                    vcd.v2d(self["ubus_tb_top.vif.sig_addr"])
-                )
-            )
+            print("READ addr: {:#x}".format(vcd.v2d(self["ubus_tb_top.vif.sig_addr"])))
             self.state = self.states["READ"]
             return
 
@@ -104,15 +96,11 @@ class UbusTracker(vcd.VCDTracker):
     def data_state(self):
         if self["ubus_tb_top.vif.sig_wait"] == "1":
             return
-        print(
-            "     DATA: {:#x}".format(
-                vcd.v2d(self["ubus_tb_top.vif.sig_data"])
-            )
-        )
+        print("     DATA: {:#x}".format(vcd.v2d(self["ubus_tb_top.vif.sig_data"])))
         self.skip = False
         self.state = self.states["IDLE"]
         # Uncommenting the below kills the tracker after 1 transaction
-        #self.finished = True
+        # self.finished = True
 
 
 if __name__ == "__main__":
@@ -123,10 +111,10 @@ if __name__ == "__main__":
     # test, so let's see everything
     logging.basicConfig()
     logger = logging.getLogger()
-    #logger.setLevel(logging.DEBUG)
+    # logger.setLevel(logging.DEBUG)
 
     # Create a parser object
-    #parser = vcd.VCDParser(log_level=logging.DEBUG)
+    # parser = vcd.VCDParser(log_level=logging.DEBUG)
     parser = vcd.VCDParser(log_level=logging.INFO)
 
     # And a tracker
