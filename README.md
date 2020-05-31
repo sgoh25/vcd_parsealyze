@@ -1,15 +1,15 @@
-VCD Parser and Analyzer
-=======================
+# VCD Parser and Analyzer
 
 The `vcd` module contains three useful classes:
 
 1.  `VCDParser` - a parser for `.vcd` files that supports streaming the
     vcd file for analysis purposes. Can accept one or more `VCDWatchers`.
-    The parser was built referring to the IEEE SystemVerilog standard 1800-2009, Section 21.7 (Value Change Dump (VCD) files).
-    It supports the following vcd file features:
+    The parser was built referring to the IEEE SystemVerilog standard
+    1800-2009, Section 21.7 (Value Change Dump (VCD) files).
+    It supports the following VCD file features:
     * Declarations such as:
-        * the `$date` and `$time` of the vcd file
-        * the `$timescale` of the vcd file
+        * the `$date` and `$time` of the VCD file
+        * the `$timescale` of the VCD file
         * `$var` variables with scoped and hierarchical (XMR) paths
     * Simulation / capture data with timestamps
     The parser currently ignores:
@@ -17,7 +17,7 @@ The `vcd` module contains three useful classes:
     * `$dumpall`, `$dumpon`, `$dumpoff`, and `$dumpvars` in the data
 1.  `VCDWatcher` - a signal watcher to be passed to `VCDParser`. It defines
     both a sensitivity list and a watched signal list. The watcher's
-    `update` method will be called whenever a sensitivity list signal
+    `should_notify` method will be called whenever a sensitivity list signal
     changes. It will be provided the current values of all signals on
     its watched signal list.
 1.  `VCDTracker` - One or more trackers can be added to a `VCDWatcher`.
@@ -29,28 +29,29 @@ The `vcd` module contains three useful classes:
     `update` methods **must** be implemented.
 
 
-Credits
-=======
+## Credits
+
 * Original code is the [toggle count sample code](http://paddy3118.blogspot.com/2008/03/writing-vcd-to-toggle-count-generator.html) example by Donald 'Paddy' McCarthy.
 * Elaborated by Gordon McGregor in 2013.
 * Improved, made 3.x compatible, and packaged by Joan Touzet in 2018.
+* Support 'b' and 'r' types by Unai Martinez-Corral in 2020.
 
 
-License
-=======
+## License
 
-       Copyright  2018  Joan Touzet
-       Copyright  2013  Gordon McGregor
+    COpyright  2020  Unai Martinez-Corral
+    Copyright  2018  Joan Touzet
+    Copyright  2013  Gordon McGregor
 
-       Licensed under the Apache License, Version 2.0 (the "License");
-       you may not use this file except in compliance with the License.
-       You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-           http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-       Unless required by applicable law or agreed to in writing, software
-       distributed under the License is distributed on an "AS IS" BASIS,
-       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-       See the License for the specific language governing permissions and
-       limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
