@@ -14,10 +14,10 @@
 class VCDWatcher:
     """Signal watching class, intended to work with the `VCDParser` class.
 
-    Provide a list of XMRs that the watcher is sensitive to (i.e., a clock to sample on) 
+    Provide a list of XMRs that the watcher is sensitive to (i.e., a clock to sample on)
     and a list of signals to actually watch.
 
-    The VCD parser will call `watcher.should_notify` when it sees a change to a signal 
+    The VCD parser will call `watcher.should_notify` when it sees a change to a signal
     on the sensitivity list and provide the changes to all watched signals. You can
     subclass this class to gate when the watcher will start notifying trackers, e.g.
     only on rising clock edges.  The default implementation triggers with every change.
@@ -78,7 +78,7 @@ class VCDWatcher:
         else:
             return None
 
-    def get2val(self, signal):
+    def getval(self, signal):
         """Attempt to convert a scalar to a numerical 0/1 value"""
         id = self.get_id(signal)
         if id in self.values:
@@ -87,7 +87,7 @@ class VCDWatcher:
                 raise ValueError
             return eval(value)
 
-    def get_active_2val(self, signal):
+    def getact(self, signal):
         """Attempt to convert a scalar to a numerical 0/1 value"""
         id = self.get_id(signal)
         if id in self.activity:

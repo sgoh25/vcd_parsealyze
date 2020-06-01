@@ -37,7 +37,7 @@ class UbusRisingClockWatcher(vcd.VCDWatcher):
         if self.get_id("ubus_tb_top.vif.sig_reset") in self.activity:
             try:
                 # exception if this is X or Z
-                if self.get_active_2val("ubus_tb_top.vif.sig_reset"):
+                if self.getact("ubus_tb_top.vif.sig_reset"):
                     print("in RESET")
                     self.in_reset = True
                     return False
@@ -49,7 +49,7 @@ class UbusRisingClockWatcher(vcd.VCDWatcher):
 
         if (
             self.get_id("ubus_tb_top.vif.sig_clock") in self.activity
-            and self.get_active_2val("ubus_tb_top.vif.sig_clock")
+            and self.getact("ubus_tb_top.vif.sig_clock")
             and not self.in_reset
         ):
             return True
