@@ -78,23 +78,31 @@ class VCDWatcher:
         else:
             return None
 
-    def getval(self, signal):
+    def _eval_value(self, value):
         """Attempt to convert a scalar to a numerical 0/1 value"""
+        if isinstance(value, str):
+            if value in "xXzZ":
+                return None
+            return eval(value)
+        if value[0] == "r":
+            return eval(value[1])
+        if value[0] == "b":
+            return value[0] + value[1]
+        raise TypeError
+
+    def getval(self, signal):
+        """Get an item from 'values'"""
         id = self.get_id(signal)
         if id in self.values:
-            value = self.values[id]
-            if value in "xXzZ":
-                raise ValueError
-            return eval(value)
+            return self._eval_value(self.values[id])
+        raise KeyError
 
     def getact(self, signal):
-        """Attempt to convert a scalar to a numerical 0/1 value"""
+        """Get an item from 'activity'"""
         id = self.get_id(signal)
         if id in self.activity:
-            value = self.activity[id]
-            if value in "xXzZ":
-                raise ValueError
-            return eval(value)
+            return self._eval_value(self.activity[id])
+        raise KeyError
 
     def add_sensitive(self, signal):
         """Add a signal to the sensitivity and watch lists"""
