@@ -242,5 +242,7 @@ class VCDParser:
                     self.vector_value_change(
                         format=c.lower(), number=rest, id=next(tokeniser)
                     )
+                elif c in "sS":
+                    self.scalar_value_change(value=rest, id=next(tokeniser))
                 else:
                     raise "Don't understand `{}` after {} words".format(token, count)
